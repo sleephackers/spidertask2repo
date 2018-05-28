@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (letter.getText().toString().trim().length() <= 0) {
-                    Toast.makeText(MainActivity.this, "It's empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Enter a letter", Toast.LENGTH_SHORT).show();
                 } else {
                     l = letter.getText().toString();
                     checkword();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void checkword()
     {
-        int flag=0;
+        int flag = 0, flag2 = 0;
         String  all;
         dashes="";
         dash.setText(currWord);
@@ -108,9 +108,13 @@ public class MainActivity extends AppCompatActivity {
         fin=temp.toString();
             dash.setText(fin);
         if (flag == 0) {
-            changePic(++wrong);
-            wrongGuesses += " " + l + " ,";
-            wGuesses.setText(wrongGuesses);
+            for (int i = 0; i < wrongGuesses.length(); i++)
+                if (wrongGuesses.charAt(i) == l.charAt(0)) flag2++;
+            if (flag2 == 0) {
+                changePic(++wrong);
+                wrongGuesses += " " + l + " ,";
+                wGuesses.setText(wrongGuesses);
+            }
         }
         else
             over();
