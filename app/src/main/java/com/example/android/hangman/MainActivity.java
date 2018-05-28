@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Button restart;
     TextView highscore;
     int hscore;
+    String wrongGuesses = "INCORRECT: ";
+    TextView wGuesses;
 
 
     @Override
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         score= findViewById(R.id.score);
         restart= findViewById(R.id.replay);
         highscore=findViewById(R.id.highscore);
+        wGuesses = findViewById(R.id.wguesses);
         dashes="";
         loadInfo();
         loadData();
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             wrong=0;dashes="";
             score.setText("");
             finish.setText("");
+                wGuesses.setText("");
             currentWord();
             changePic(wrong);
             }
@@ -65,8 +70,12 @@ public class MainActivity extends AppCompatActivity {
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                l=letter.getText().toString();
-                checkword();
+                if (letter.getText().toString().trim().length() <= 0) {
+                    Toast.makeText(MainActivity.this, "It's empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    l = letter.getText().toString();
+                    checkword();
+                }
             }
         });
     }
@@ -84,10 +93,9 @@ public class MainActivity extends AppCompatActivity {
             if(correct) {
                 dashes +=all + " ";
                 flag++;
+            } else {
+                dashes += "_ ";
             }
-            else
-                dashes+="_ ";
-
         }
 
         for(int i=0;i<dashes.length();i++)
@@ -99,8 +107,11 @@ public class MainActivity extends AppCompatActivity {
         }
         fin=temp.toString();
             dash.setText(fin);
-        if(flag==0)
+        if (flag == 0) {
             changePic(++wrong);
+            wrongGuesses += " " + l + " ,";
+            wGuesses.setText(wrongGuesses);
+        }
         else
             over();
 

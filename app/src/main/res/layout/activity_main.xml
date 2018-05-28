@@ -31,7 +31,8 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:background="#4DB6AC"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:maxLength="1" />
     <Button
         android:id="@+id/checkb"
         android:layout_width="wrap_content"
@@ -40,6 +41,14 @@
         android:layout_gravity="center_horizontal"
         android:text="CHECK"
         android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/wguesses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="italic" />
     <TextView
         android:id="@+id/endtext"
         android:layout_width="wrap_content"
