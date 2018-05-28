@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         loadInfo();
         loadData();
         changePic(wrong);
+        check.setEnabled(true);
         highscore.setText("HIGHSCORE:"+hscore);
         currentWord();
 
@@ -61,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
             wrong=0;dashes="";
             score.setText("");
             finish.setText("");
-                wGuesses.setText("");
+            wrongGuesses = "INCORRECT: ";
+            wGuesses.setText("");
+            check.setEnabled(true);
             currentWord();
             changePic(wrong);
             }
@@ -173,9 +176,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void gameOver()
     {
-        if(wrong==6)
-        finish.setText("The word is:"+currWord);
+        if(wrong==6) {
+            finish.setText("The word is:" + currWord);
+            check.setEnabled(false);
+
+        }
         else {
+            check.setEnabled(false);
             finish.setText("Congrats! You've found out!");
             score.setText("YOUR SCORE IS:" + wrong);
             saveInfo();
